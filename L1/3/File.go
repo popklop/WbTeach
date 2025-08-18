@@ -14,7 +14,7 @@ func main() {
 
 func processFromChan(N int) {
 	chanel := make(chan int)
-	for i := 0; i < 3; i++ {
+	for i := 0; i < N; i++ {
 		go worker(chanel)
 	}
 	for i := 0; i < 10; i++ {
