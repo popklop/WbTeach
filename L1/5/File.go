@@ -8,9 +8,13 @@ import (
 )
 
 func main() {
+	solution(3)
+}
+
+func solution(n time.Duration) {
 	datachan := make(chan int)
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, time.Second*3)
+	ctx, cancel := context.WithTimeout(ctx, time.Second*n)
 	defer cancel()
 
 	wg := sync.WaitGroup{}
