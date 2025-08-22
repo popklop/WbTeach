@@ -3,13 +3,24 @@ package main
 import "fmt"
 
 func main() {
-	a, b := 44, 23
-	//Операциями
-	//a = a + b
-	//b = a - b
-	//a = a - b
-	//Множ. присваивание
-	//a, b = b, a
-	fmt.Println(a, b)
+	vartype(2)
+}
 
+func vartype(a interface{}) {
+	switch a.(type) {
+	case int:
+		fmt.Println("int")
+	case string:
+		fmt.Println("string")
+	case bool:
+		fmt.Println("bool")
+	case chan int:
+		fmt.Println("chan int")
+	case chan string:
+		fmt.Println("chan string")
+	case chan bool:
+		fmt.Println("chan bool")
+	default:
+		fmt.Println("Неизвестный тип данных!")
+	}
 }
