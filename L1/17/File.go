@@ -10,7 +10,6 @@ func main() {
 }
 
 func binsearch(arr []int, target int) int {
-	fmt.Println(arr)
 	l := 0
 	r := len(arr) - 1
 	for l <= r {
