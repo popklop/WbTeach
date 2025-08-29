@@ -44,6 +44,16 @@ func TestEmptystring(t *testing.T) {
 		t.Error("Результат не совпадает с ожидаемым!")
 	}
 }
+func TestBigData(t *testing.T) {
+	res, err := Stringdecoder("a10bc11")
+	if err != nil {
+		t.Error(err)
+	}
+	exp := "aaaaaaaaaabccccccccccc"
+	if res != exp {
+		t.Error("Результат не совпадает с ожидаемым!")
+	}
+}
 func TestEscape1(t *testing.T) {
 	res, err := Stringdecoder("qwe\\4\\5")
 	if err != nil {
