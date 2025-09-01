@@ -2,48 +2,47 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
 func main() {
-	poiskAnogram([]string{"пятак", "пятка", "тяпка", "листок", "слиток", "столик", "стол"})
+	fmt.Println(poiskAnogram([]string{"пятак", "пятка", "тяпка", "атяпк", "листок", "слиток", "столик", "стол"}))
 }
 
-func poiskAnogram(inmaswrong []string) {
-	mapa := make(map[string][]int)
+func poiskAnogram(inmaswrong []string) map[string][]string {
+	mapa := make(map[string][]string)
 	inmas := []string{}
 	for i := range inmaswrong {
 		inmas = append(inmas, strings.ToLower(inmaswrong[i]))
 	}
 	for i := range inmas {
-		mapa[string(qsort([]rune(inmas[i])))] = append(mapa[string(qsort([]rune(inmas[i])))], i)
+		mapa[string(qsort([]rune(inmas[i])))] = append(mapa[string(qsort([]rune(inmas[i])))], (inmas[i]))
 	}
-	for _, v := range mapa {
-		l := make([]string, 0)
+	for k, v := range mapa {
 		if len(v) > 1 {
-
-			for i := 0; i < len(v); i++ {
-				l = append(l, inmas[v[i]])
-				continue
-
-			}
-			fmt.Printf("%s : %s\n", inmas[v[0]], l)
+			val := mapa[k]
+			delete(mapa, k)
+			mapa[v[0]] = val
+			sort.Strings(val)
+		} else {
+			delete(mapa, k)
 		}
-
 	}
-
+	return mapa
 }
 
 func qsort(s []rune) []rune {
 	if len(s) <= 1 {
-		return (s)
+		return s
 	}
 	lmas := []rune{}
 	rmas := []rune{}
 	mid := s[len(s)/2]
+	midarr := []rune{}
 	for i := 0; i < len(s); i++ {
 		if s[i] == mid {
-			continue
+			midarr = append(midarr, s[i])
 		}
 		if s[i] < mid {
 			lmas = append(lmas, (s[i]))
@@ -54,5 +53,5 @@ func qsort(s []rune) []rune {
 	}
 	lmasorted := qsort(lmas)
 	rmasorted := qsort(rmas)
-	return append(append(lmasorted, mid), rmasorted...)
+	return append(append(lmasorted, midarr...), rmasorted...)
 }
