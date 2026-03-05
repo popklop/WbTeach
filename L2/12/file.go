@@ -10,10 +10,6 @@ import (
 )
 
 func main() {
-	sol()
-}
-
-func sol() {
 	var (
 		A         int
 		B         int
@@ -72,13 +68,14 @@ func sol() {
 		}
 		defer file.Close()
 		scanner = bufio.NewScanner(file)
+
 	} else {
 		scanner = bufio.NewScanner(os.Stdin)
 	}
 
 	strnum := 0
 	printEnd := 0
-	printStart := 1
+	var printStart int
 	type bufLine struct {
 		num  int
 		text string
@@ -147,6 +144,10 @@ func sol() {
 			}
 			printed[strnum] = true
 		}
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintf(os.Stderr, "ошибка чтения: %v\n", err)
+		os.Exit(1)
 	}
 	if c {
 		fmt.Println(cCounter)
